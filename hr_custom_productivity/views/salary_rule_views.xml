@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!-- تعريف قاعدة راتب جديدة -->
+        <record id="salary_rule_productivity" model="hr.salary.rule">
+            <field name="name">Productivity Salary</field>
+            <field name="category_id" ref="hr_payroll_community.hr_salary_rule_category_view_form"/>
+            <field name="code">PRODUCTIVITY</field>
+            <field name="sequence">10</field>
+            <field name="amount_select">code</field>
+            <field name="amount_python_compute">
+                <![CDATA[
+            # الحساب بناءً على الإنتاجية اليومية
+            # نبحث عن شريحة الإنتاجية المرتبطة بالموظف
+            if employee.contract_id.production_range_id:
+                # حساب الأجر بناءً على عدد القطع المنتجة
+                return employee.contract_id.production_range_id.rate_per_piece * employee.attendance_ids.filtered(lambda a: a.date_from.month == date.today().month).mapped('daily_production')
+            return 0.0
+            ]]>
+            </field>
+        </record>
+
+    </data>
+</odoo>

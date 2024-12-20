@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="view_attendance_tree_inherit" model="ir.ui.view">
+            <field name="name">hr.attendance.tree.inherit</field>
+            <field name="model">hr.attendance</field>
+            <field name="inherit_id" ref="hr_attendance.view_attendance_tree"/>
+            <field name="arch" type="xml">
+                <xpath expr="//tree//field[@name='worked_hours']" position="after">
+                    <field name="daily_production"/>
+                    <field name="daily_wage"/>
+                </xpath>
+            </field>
+        </record>
+
+        <record id="view_attendance_form_inherit" model="ir.ui.view">
+            <field name="name">hr.attendance.form.inherit</field>
+            <field name="model">hr.attendance</field>
+            <field name="inherit_id" ref="hr_attendance.hr_attendance_view_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//sheet//group//group//group//field[@name='worked_hours']" position="before">
+                    <field name="daily_production"/>
+                    <field name="production_range_id" domain="[('department_id', '=', employee_id.department_id.id)]"/>
+                    <field name="daily_wage"/>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

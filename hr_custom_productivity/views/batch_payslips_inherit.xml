@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="hr_payslip_productivity" model="hr.salary.rule">
+            <field name="name">Monthly Productivity</field>
+            <field name="category_id" ref="hr_payroll_salary_rule_category"/>
+            <field name="code">MONTHLY_PRODUCTIVITY</field>
+            <field name="sequence">10</field>
+            <field name="amount_select">code</field>
+            <field name="condition_select">none</field>
+            <field name="amount_python_compute">
+                <![CDATA[
+            payslip = payslip_id
+            productivity = payslip.get_productivity_for_month(payslip.employee_id.id)
+            return productivity
+            ]]>
+            </field>hr_payroll_community.hr_salary_rule_view
+        </record>
+
+    </data>
+</odoo>
+

@@ -16,7 +16,7 @@
     'currency': 'USD',
 
     'category': 'hr',
-    'version': '17.0',
+    'version': "17.0.1.0.0",
     'images': ['static/description/banner.gif'],
 
     'depends': ['base',

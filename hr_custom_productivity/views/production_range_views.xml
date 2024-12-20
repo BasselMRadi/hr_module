@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="view_production_range_tree" model="ir.ui.view">
+        <field name="name">production.range.tree</field>
+        <field name="model">production.range</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name"/>
+                <field name="min_qty"/>
+                <field name="max_qty"/>
+                <field name="rate_per_piece"/>
+                <field name="department_id"/>
+                <!-- Adding a calculated field for range size -->
+                <field name="range_size" string="Range Size"/>
+            </tree>
+        </field>
+    </record>
+    <record id="view_production_range_search" model="ir.ui.view">
+        <field name="name">production.range.search</field>
+        <field name="model">production.range</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="name"/>
+                <field name="department_id"/>
+                <filter name="min_qty_filter" string="Min Quantity" domain="[['min_qty', '>=', 0]]"/>
+                <filter name="max_qty_filter" string="Max Quantity" domain="[['max_qty', '>=', 0]]"/>
+            </search>
+        </field>
+    </record>
+
+    <record id="view_production_range_form" model="ir.ui.view">
+        <field name="name">production.range.form</field>
+        <field name="model">production.range</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <field name="name"/>
+                        <field name="min_qty"/>
+                        <field name="max_qty"/>
+                        <field name="rate_per_piece"/>
+                        <field name="department_id"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+
+    <record id="action_production_range" model="ir.actions.act_window">
+        <field name="name">Production Ranges</field>
+        <field name="res_model">production.range</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+    <menuitem id="menu_production_range_main" name="Production Ranges" groups="base.group_user"
+              parent="hr_payroll_community.menu_hr_payroll_community_root" sequence="10"/>
+    <!--    <menuitem id="menu_production_range_main" name="Production Ranges" parent="base.menu_custom" groups="base.group_user" sequence="10" />-->
+    <menuitem id="menu_production_range" name="Manage Ranges" parent="menu_production_range_main"
+              action="action_production_range"/>
+</odoo>

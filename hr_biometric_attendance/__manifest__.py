@@ -52,7 +52,7 @@
     'external_dependencies': {
         'python': ['pyzk'], },
     'images': ['static/description/banner.jpg'],
-    'license': 'AGPL-3',
+    'license': 'LGPL-3',
     'installable': True,
     'auto_install': False,
     'application': False,
